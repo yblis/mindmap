@@ -21,6 +21,10 @@ def serve_manifest():
 def serve_sw():
     return app.send_static_file('sw.js')
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('icons/favicon.ico')
+
 @app.route('/view/<token>')
 def view_map(token):
     # Shared view - mode READ-ONLY

@@ -1,4 +1,75 @@
 // --- CONFIGURATION ---
+function toggleMenu() {
+    const panel = document.getElementById('controls-panel');
+    panel.classList.toggle('collapsed');
+}
+
+// --- UI HELPERS (NO BROWSER NOTIFICATIONS) ---
+
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    
+    container.appendChild(toast);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+        toast.classList.add('show');
+    });
+
+    // Auto remove
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+let confirmCallback = null;
+
+function openConfirmModal(title, message, callback) {
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    confirmCallback = callback;
+    document.getElementById('confirmModal').style.display = 'flex';
+}
+
+function closeConfirmModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+    confirmCallback = null;
+}
+
+// Add event listener for confirm button just once or use onclick in HTML
+// But better to attach here to handle the callback dynamically
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('confirmDataBtn').onclick = () => {
+        if (confirmCallback) confirmCallback();
+        closeConfirmModal();
+    };
+});
+
+function openShareModal(url) {
+    const modal = document.getElementById('shareModal');
+    const input = document.getElementById('shareInput');
+    input.value = url;
+    modal.style.display = 'flex';
+    input.select();
+}
+
+function closeShareModal() {
+    document.getElementById('shareModal').style.display = 'none';
+}
+
+function copyShareLink() {
+    const input = document.getElementById('shareInput');
+    input.select();
+    document.execCommand('copy'); // Legacy but works widely
+    // navigator.clipboard.writeText(input.value); // Modern way
+    showToast("Lien copié dans le presse-papier", "success");
+    // closeShareModal(); // Keep open or close? User might want to see it.
+}
+
 const duration = 750;
 const margin = {top: 20, right: 90, bottom: 30, left: 90};
 let width = window.innerWidth - margin.left - margin.right;
@@ -246,7 +317,7 @@ d3.select("body").on("click", () => {
 
 function addChildToSelected() {
     if (!selectedNode) {
-        alert("Veuillez sélectionner un noeud pour ajouter un enfant.");
+        showToast("Veuillez sélectionner un noeud pour ajouter un enfant.", "error");
         return;
     }
     
@@ -270,11 +341,11 @@ function addChildToSelected() {
 
 function removeSelectedNode() {
     if (!selectedNode) {
-        alert("Sélectionnez un noeud à supprimer.");
+        showToast("Sélectionnez un noeud à supprimer.", "error");
         return;
     }
     if (selectedNode === root) {
-        alert("Impossible de supprimer la racine.");
+        showToast("Impossible de supprimer la racine.", "error");
         return;
     }
     
@@ -330,10 +401,10 @@ function saveLocal() {
 }
 
 function resetMap() {
-    if(confirm("Voulez-vous réinitialiser et tout effacer ?")) {
+    openConfirmModal("Réinitialisation", "Voulez-vous réinitialiser et tout effacer ?", () => {
         localStorage.removeItem('mindmap_data');
         location.reload();
-    }
+    });
 }
 
 function exportMap() {
@@ -381,10 +452,10 @@ function submitImport() {
         saveLocal();
         
         closeImportModal();
-        alert("Import réussi !");
+        // alert("Import réussi !"); // Success alert removed per user request
         
     } catch (e) {
-        alert("Erreur lors de l'import : JSON invalide.\n" + e.message);
+        showToast("Erreur lors de l'import : " + e.message, "error");
     }
 }
 
@@ -398,10 +469,10 @@ async function shareMap() {
         });
         const res = await response.json();
         if(res.url) {
-            prompt("Lien de partage (Lecture seule) :", res.url);
+            openShareModal(res.url);
         }
     } catch(e) {
-        alert("Erreur lors du partage : " + e);
+        showToast("Erreur lors du partage : " + e, "error");
     }
 }
 

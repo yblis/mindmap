@@ -1,9 +1,12 @@
-const CACHE_NAME = 'mindmap-cache-v1';
+const CACHE_NAME = 'mindmap-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/static/css/style.css',
   '/static/js/main.js',
   '/static/manifest.json',
+  '/static/icons/favicon.ico',
+  '/static/icons/icon-192.png',
+  '/static/icons/icon-512.png',
   'https://d3js.org/d3.v7.min.js',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap'
 ];

@@ -12,3 +12,5 @@ dbs/*.db
 .env
 venv/
 .venv/
+
+docker-compose.yml

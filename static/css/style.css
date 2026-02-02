@@ -75,6 +75,7 @@ body {
     left: 20px;
     background: rgba(45, 45, 53, 0.95);
     padding: 15px;
+    padding-top: 45px; /* Space for the button */
     border-radius: 8px;
     border: 1px solid #4a4a55;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
@@ -83,7 +84,88 @@ body {
     gap: 10px;
     z-index: 100;
     max-width: 300px;
+    width: 300px; 
+    /* Transition on width, height/max-height, and padding */
+    transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    
+    overflow: hidden;
+    max-height: 800px;
+    min-height: 48px; /* Ensure it never fully disappears */
+}
+
+/* Collapsed State */
+.controls.collapsed {
+    padding: 0;
+    width: 48px;
+    height: 48px; /* Explicit height */
+    max-height: 48px;
+    border-radius: 8px; 
+    background: rgba(45, 45, 53, 0.8);
+    border-color: transparent;
+    cursor: pointer;
+    /* Center the button within the circle */
+    align-items: center;
+    justify-content: center;
+}
+
+.controls.collapsed:hover {
+    background: rgba(60, 60, 70, 0.9);
+    transform: scale(1.05);
+}
+
+/* Toggle Button */
+.toggle-menu {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Moved to Left */
+    right: auto;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0; /* Remove padding to be precise */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.toggle-menu svg {
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-menu:hover {
+    color: #aeaeae;
+}
+
+/* Button position when collapsed */
+.controls.collapsed .toggle-menu {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Reset other positions */
+    right: auto;
+    bottom: auto;
+}
+
+.controls-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.controls.collapsed .controls-content {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    position: absolute; /* Take out of flow to allow shrinking */
 }
 
 .controls h1 {
@@ -250,4 +332,44 @@ body {
     .node text {
          font-size: 14px; /* Texte plus lisible */
     }
+}
+
+/* --- TOASTS --- */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    min-width: 250px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    border-left: 4px solid #6c7ae0;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.error {
+    border-left-color: #e55039;
+    background: #2c1e1e;
+}
+
+.toast.success {
+    border-left-color: #2ecc71;
+    background: #1e2c1e;
 }
