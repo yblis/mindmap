@@ -1,5 +1,7 @@
 # 🧠 MindMap Web Application
 
+> **Développé à 100% par l'IA** 🤖
+
 Une application de MindMapping légère, esthétique et **conteneurisée**, conçue pour créer, éditer et partager des cartes mentales simplement.
 
 ![MindMap Screenshot](https://via.placeholder.com/800x400?text=MindMap+App+Preview)
