@@ -1,0 +1,14 @@
+# System Files
+.DS_Store
+
+# Python Cache & Artifacts
+__pycache__/
+*.pyc
+
+# Application Database (SQLite)
+dbs/*.db
+
+# Local Environment
+.env
+venv/
+.venv/

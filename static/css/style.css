@@ -1,0 +1,217 @@
+/* --- STYLE GLOBAL --- */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e24; /* Fond sombre */
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+#chart-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- STYLES SVG D3.js --- */
+
+/* Liens */
+.link {
+    fill: none;
+    stroke: #555560;
+    stroke-width: 1.5px;
+    transition: all 0.5s ease;
+}
+
+/* Noeuds */
+.node rect {
+    fill: #2d2d35;
+    stroke: #4a4a55;
+    stroke-width: 1px;
+    rx: 6;
+    ry: 6;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.node rect:hover {
+    stroke: #6c7ae0;
+    fill: #363640;
+}
+
+/* Noeud sélectionné */
+.node.selected rect {
+    stroke: #ff9f43;
+    stroke-width: 2px;
+    fill: #363640;
+}
+
+/* Noeud Racine */
+.node--root rect {
+    fill: #4a4a55;
+    stroke: #6c7ae0;
+    stroke-width: 2px;
+}
+
+/* Texte */
+.node text {
+    font-size: 12px;
+    fill: #e0e0e0;
+    pointer-events: none;
+}
+
+/* Expander (Cercle) */
+.node circle.expander {
+    stroke: #6c7ae0;
+    stroke-width: 1.5px;
+    fill: #1e1e24;
+    cursor: pointer;
+}
+
+/* --- INTERFACE UTILISATEUR --- */
+.controls {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(45, 45, 53, 0.95);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #4a4a55;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.controls h1 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background-color: #4a4a55;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #5a5a65;
+}
+
+.btn.primary {
+    background-color: #6c7ae0;
+}
+
+.btn.primary:hover {
+    background-color: #5a6ad0;
+}
+
+.btn.danger {
+    background-color: #e55039;
+}
+
+.btn.danger:hover {
+    background-color: #c0392b;
+}
+
+.legend {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #aaa;
+    line-height: 1.4;
+}
+
+/* Édition de texte (ForeignObject input) */
+.node-input-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-input {
+    width: 90%;
+    background: #2d2d35;
+    color: #fff;
+    border: 1px solid #6c7ae0;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    text-align: left;
+}
+
+/* --- MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #2d2d35;
+    border: 1px solid #4a4a55;
+    border-radius: 8px;
+    padding: 20px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+.modal p {
+    font-size: 13px;
+    color: #ccc;
+    margin: 0;
+}
+
+.modal textarea {
+    width: 100%;
+    background: #1e1e24;
+    border: 1px solid #4a4a55;
+    color: #fff;
+    font-family: monospace;
+    padding: 10px;
+    resize: vertical;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
