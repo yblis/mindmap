@@ -13,6 +13,14 @@ def index():
     # Regular home page - mode EDIT
     return render_template('index.html', mode='edit', initial_data=None)
 
+@app.route('/manifest.json')
+def serve_manifest():
+    return app.send_static_file('manifest.json')
+
+@app.route('/sw.js')
+def serve_sw():
+    return app.send_static_file('sw.js')
+
 @app.route('/view/<token>')
 def view_map(token):
     # Shared view - mode READ-ONLY

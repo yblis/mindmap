@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fond (optionnel, retirer pour transparence totale) -->
+  <!-- <rect width="512" height="512" fill="#1e1e24" rx="100" /> -->
+  
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c7ae0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff9f43;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Central Node -->
+  <circle cx="256" cy="400" r="40" fill="url(#grad1)" />
+  
+  <!-- Left Branch -->
+  <line x1="256" y1="400" x2="150" y2="300" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="150" cy="300" r="30" fill="#2d2d35" stroke="#6c7ae0" stroke-width="8" />
+  
+  <line x1="150" y1="300" x2="80" y2="200" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="80" cy="200" r="25" fill="#2d2d35" stroke="#6c7ae0" stroke-width="6" />
+
+  <line x1="150" y1="300" x2="200" y2="180" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="200" cy="180" r="25" fill="#2d2d35" stroke="#6c7ae0" stroke-width="6" />
+
+  <!-- Right Branch -->
+  <line x1="256" y1="400" x2="362" y2="300" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="362" cy="300" r="30" fill="#2d2d35" stroke="#ff9f43" stroke-width="8" />
+
+  <line x1="362" y1="300" x2="432" y2="200" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="432" cy="200" r="25" fill="#2d2d35" stroke="#ff9f43" stroke-width="6" />
+  
+  <line x1="362" y1="300" x2="312" y2="180" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="312" cy="180" r="25" fill="#2d2d35" stroke="#ff9f43" stroke-width="6" />
+  
+  <!-- Top Branch -->
+  <line x1="256" y1="400" x2="256" y2="150" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="256" cy="150" r="35" fill="#2d2d35" stroke="#e0e0e0" stroke-width="8" />
+
+  <line x1="256" y1="150" x2="180" y2="80" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="180" cy="80" r="20" fill="#2d2d35" stroke="#e0e0e0" stroke-width="5" />
+  
+  <line x1="256" y1="150" x2="332" y2="80" stroke="#555560" stroke-width="12" stroke-linecap="round" />
+  <circle cx="332" cy="80" r="20" fill="#2d2d35" stroke="#e0e0e0" stroke-width="5" />
+
+</svg>
